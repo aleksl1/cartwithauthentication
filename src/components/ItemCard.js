@@ -1,11 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../store/cart-slice";
+// import { sendCartItems } from "../store/cart-fetch";
 
 const ItemCard = (props) => {
   const dispatch = useDispatch();
 
   const addToCartHandler = () => {
     console.log(`add`);
+    // sendCartItems({
+    //   name: props.name,
+    //   amount: 1,
+    //   id: props.id,
+    // });
     dispatch(
       addItemToCart({
         name: props.name,

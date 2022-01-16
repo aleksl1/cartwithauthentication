@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 
 const DB_URL = `https://shopjs-fc7ef-default-rtdb.europe-west1.firebasedatabase.app/Items.json`;
 
-const Items = (props) => {
+const Items = () => {
   const [items, setItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,13 +35,11 @@ const Items = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(`eff`);
     fetchItems();
   }, [fetchItems]);
 
   return (
     <>
-      {console.log(`render`)}
       {isLoading && <LoadingSpinner />}
       {errorMessage ? errorMessage : ""}
       {!errorMessage &&

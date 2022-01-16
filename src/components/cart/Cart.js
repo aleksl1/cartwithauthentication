@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCart } from "../../store/cart-slice";
 import { Link } from "react-router-dom";
-
-// const numberOfItems = "11";
-// const totalPrice = "25";
+import CartItem from "./CartItem";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -20,9 +18,13 @@ const Cart = () => {
   }, [dispatch]);
 
   const showCartItems = cartItems.map((item) => (
-    <li key={item.id}>
-      {item.name} + {item.price} +{item.amount}
-    </li>
+    <CartItem
+      key={item.id}
+      id={item.id}
+      name={item.name}
+      price={item.price}
+      amount={item.amount}
+    />
   ));
 
   const cartCloseHandler = () => {
@@ -55,8 +57,8 @@ const Cart = () => {
         {totalItems === 0 ? (
           <p>Your Cart is empty</p>
         ) : (
-          <div>
-            <ul>{showCartItems}</ul>
+          <div className="container">
+            <div className="cart-items-container">{showCartItems}</div>
             <span>
               You have {totalItems} items in cart. For {totalPrice}$
             </span>
@@ -65,7 +67,12 @@ const Cart = () => {
 
         <footer>
           <div className="cart-actions">
-            <Link to="payment" role="button" onClick={cartPaymentHandler}>
+            <Link
+              disabled={totalItems === 0 ? true : false}
+              to="payment"
+              role="button"
+              onClick={cartPaymentHandler}
+            >
               Payment
             </Link>
             <Link

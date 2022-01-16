@@ -11,7 +11,7 @@ const FrontPage = (props) => {
         </p>
       </div>
       <div className="container items-display">
-        <Items items={props.items} />
+        <Items />
       </div>
     </React.Fragment>
   );

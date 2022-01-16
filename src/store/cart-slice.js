@@ -22,9 +22,7 @@ export const cartSlice = createSlice({
       const repeatIndex = state.items.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log(`index`, repeatIndex);
       if (repeatIndex === -1) {
-        console.log("adddddddddd");
         state.totalItems = state.totalItems + 1;
         state.totalPrice = state.totalPrice + action.payload.price;
         state.items = [...state.items, action.payload];
@@ -33,18 +31,35 @@ export const cartSlice = createSlice({
         state.totalPrice = state.totalPrice + action.payload.price;
         state.items[repeatIndex].amount =
           state.items[repeatIndex].amount + action.payload.amount;
-        state.items[repeatIndex].price =
-          state.items[repeatIndex].price + action.payload.price;
       }
     },
-    removeItemFromCart: () => {
-      console.log(`removing`);
+    removeItemFromCart: (state, action) => {
+      const itemIndex = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (action.payload.removeAll) {
+        state.totalItems = state.totalItems - state.items[itemIndex].amount;
+        state.totalPrice =
+          state.totalPrice -
+          state.items[itemIndex].amount * state.items[itemIndex].price;
+        state.items.splice(itemIndex, 1);
+      } else {
+        if (state.items[itemIndex].amount === 1) {
+          state.totalItems--;
+          state.totalPrice = state.totalPrice - state.items[itemIndex].price;
+          state.items[itemIndex].amount = state.items[itemIndex].amount - 1;
+          state.items.splice(itemIndex, 1);
+        } else {
+          state.totalItems--;
+          state.totalPrice = state.totalPrice - state.items[itemIndex].price;
+          state.items[itemIndex].amount = state.items[itemIndex].amount - 1;
+        }
+      }
     },
     clearCart: () => {
       console.log(`clearing`);
     },
     toggleCart: (state, action) => {
-      console.log(`tglle`);
       state.isVisible = action.payload;
     },
   },

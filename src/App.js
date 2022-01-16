@@ -23,6 +23,7 @@ function App() {
         <Route path="cart/payment" element={<Payment />} />
         <Route path="user/login" element={<LoginForm />} />
         <Route path="user/signup" element={<SignUpForm />} />
+        <Route path="user/signup/terms" element={<ErrorPage />} />
         <Route path="user/login/reset" element={<ResetPassword />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
