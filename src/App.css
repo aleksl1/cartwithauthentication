@@ -1,38 +1,52 @@
-.App {
-  text-align: center;
-}
+/* https://picocss.com/docs/ */
+/* 
+ Breakpoint	<576px	≥576px	≥768px	≥992px	≥1200px
+Viewport	100%	540px	720px	960px	1140px */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login-page,
+.form {
+  margin: 4rem auto;
+  width: 50%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.cart {
+  min-width: 50%;
+  z-index: 1999;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.introduction {
+  margin: 4rem auto;
+}
+.items-display {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
-
-.App-link {
-  color: #61dafb;
+.item-card {
+  flex-basis: 26%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 997px) {
+  .item-card {
+    flex-basis: 36%;
   }
-  to {
-    transform: rotate(360deg);
+}
+@media (max-width: 768px) {
+  .item-card {
+    flex-basis: 46%;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-page,
+  .form {
+    margin: 2rem auto;
+    width: 80%;
+  }
+  .cart {
+    min-width: 80%;
+  }
+  .introduction {
+    margin: 2rem auto;
+  }
+  .item-card {
+    flex-basis: 80%;
   }
 }
