@@ -116,3 +116,27 @@ dialog article.cart {
 .invalid {
   color: rgb(248, 121, 121);
 }
+.cart-number-container {
+  position: relative;
+}
+.cart-number {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #1095c1;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+}
+@media (max-width: 576px) {
+  .cart-number {
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

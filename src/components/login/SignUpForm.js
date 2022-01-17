@@ -1,40 +1,54 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-// const user = {name: 'aleks', email: 'test@test.com', password:'12345678', repeat: '12345678'}
+// const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
 
 const SignUpForm = () => {
-  // const [newUserData, setNewUserData] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   userCart: [],
-  // });
-  const [isNameValid, setIsNameValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-  const [nameBlur, setNameBlur] = useState(false);
+
   const [emailBlur, setEmailBlur] = useState(false);
   const [passwordBlur, setPasswordBlur] = useState(false);
-  const inputNameRef = useRef();
+  // const [errorMessage, setErrorMessage] = useState("");
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
   const checkboxValueRef = useRef();
   const navigate = useNavigate();
 
-  const inputNameHandler = (e) => {
-    setNameBlur(false);
-    inputNameRef.current.value = e.target.value;
-  };
+  // const signUpNewUser = (user) => {
+  //   fetch(SIGNUP_KEY, {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       email: user.email,
+  //       password: user.password,
+  //       returnSecureToken: true,
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         console.log(`OK`);
+  //         return response.json();
+  //       } else {
+  //         return response.json();
+  //       }
+  //     })
+  //     .then((data) => {
+  //       if (data.error) {
+  //         setErrorMessage(data.error.message);
+  //       } else {
+  //         console.log(data);
+  //       }
+  //     });
+  // };
 
   const inputEmailHandler = (e) => {
     setEmailBlur(false);
     inputEmailRef.current.value = e.target.value;
   };
-  const nameBlurHandler = () => {
-    setNameBlur(true);
-  };
+
   const emailBlurHandler = () => {
     setEmailBlur(true);
   };
@@ -48,14 +62,6 @@ const SignUpForm = () => {
   const termsCheckHandler = (e) => {
     checkboxValueRef.current.value = e.target.checked;
     setIsTermsChecked((prevState) => !prevState);
-  };
-
-  const validateName = () => {
-    if (inputNameRef.current.value.length < 5) {
-      setIsNameValid(false);
-    } else {
-      setIsNameValid(true);
-    }
   };
 
   const validateEmail = () => {
@@ -75,57 +81,38 @@ const SignUpForm = () => {
   };
 
   useEffect(() => {
-    if (nameBlur) {
-      validateName();
-    }
     if (emailBlur) {
       validateEmail();
     }
     if (passwordBlur) {
       validatePassword();
     }
-  }, [emailBlur, passwordBlur, nameBlur]);
+  }, [emailBlur, passwordBlur]);
 
   const submitFormHandler = (e) => {
     e.preventDefault();
 
     if (
-      inputNameRef.current.value.length > 4 &&
       inputEmailRef.current.value.includes("@") &&
-      inputPasswordRef.current.value.length > 8
+      inputPasswordRef.current.value.length > 7
     ) {
-      const newUserData = {
-        name: inputNameRef.current.value,
-        email: inputEmailRef.current.value,
-        password: inputPasswordRef.current.value,
-        userCart: [],
-      };
-      // sendFormData(newUserData);
+      // signUpNewUser({
+      //   email: inputEmailRef.current.value,
+      //   password: inputPasswordRef.current.value,
+      // });
       navigate("/user/login");
     }
-    inputNameRef.current.value = "";
     inputEmailRef.current.value = "";
     inputPasswordRef.current.value = "";
     checkboxValueRef.current.value = false;
   };
+  // if (errorMessage) {
+  //   return <p>{errorMessage}</p>;
+  // }
 
   return (
     <div className="container">
       <form onSubmit={submitFormHandler} className="form">
-        <label htmlFor="name">Name</label>
-        <input
-          type="name"
-          id="name"
-          name="name"
-          ref={inputNameRef}
-          onChange={inputNameHandler}
-          onBlur={nameBlurHandler}
-        />
-        {!isNameValid && (
-          <small className="invalid">
-            Name must be longer than 4 characters
-          </small>
-        )}
         <label htmlFor="email">Email adress</label>
         <input
           type="email"
@@ -169,7 +156,7 @@ const SignUpForm = () => {
           <small>You need to agree to terms and conditions</small>
         )}
 
-        <button type="submit">Sign Up</button>
+        <button type="submit">Create an Account</button>
       </form>
     </div>
   );
