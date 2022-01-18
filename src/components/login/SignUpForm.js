@@ -1,48 +1,57 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
+const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
 
 const SignUpForm = () => {
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-
   const [emailBlur, setEmailBlur] = useState(false);
   const [passwordBlur, setPasswordBlur] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState("");
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
   const checkboxValueRef = useRef();
   const navigate = useNavigate();
+  const [wasFormSubmitted, setWasFormSubmitted] = useState(false);
+  const [userSignedUp, setUserSignedUp] = useState(false);
+  const [signUpFailed, setSignUpFailed] = useState(false);
 
-  // const signUpNewUser = (user) => {
-  //   fetch(SIGNUP_KEY, {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       email: user.email,
-  //       password: user.password,
-  //       returnSecureToken: true,
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         console.log(`OK`);
-  //         return response.json();
-  //       } else {
-  //         return response.json();
-  //       }
-  //     })
-  //     .then((data) => {
-  //       if (data.error) {
-  //         setErrorMessage(data.error.message);
-  //       } else {
-  //         console.log(data);
-  //       }
-  //     });
-  // };
+  const signUpNewUser = useCallback(
+    (user) => {
+      fetch(SIGNUP_KEY, {
+        method: "POST",
+        body: JSON.stringify({
+          email: user.email,
+          password: user.password,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          console.log(`res`, response);
+          if (!response.ok) {
+            console.log(`error in fetch`);
+            setSignUpFailed(true);
+            navigate("/user/authinfo", {
+              state: { action: "SignUp", success: false },
+            });
+            return response.json();
+          } else {
+            navigate("/user/authinfo", {
+              state: { action: "SignUp", success: true },
+            });
+            return response.json();
+          }
+        })
+        .then((data) => {
+          console.log(data);
+        });
+    },
+    [navigate]
+  );
 
   const inputEmailHandler = (e) => {
     setEmailBlur(false);
@@ -89,22 +98,36 @@ const SignUpForm = () => {
     }
   }, [emailBlur, passwordBlur]);
 
+  useEffect(() => {
+    console.log(wasFormSubmitted);
+    console.log(`effect`);
+    if (wasFormSubmitted) {
+      console.log(`effect iffffff`);
+      signUpNewUser({
+        email: inputEmailRef.current.value,
+        password: inputPasswordRef.current.value,
+      });
+    }
+  }, [userSignedUp, wasFormSubmitted, signUpNewUser]);
+
   const submitFormHandler = (e) => {
     e.preventDefault();
-
+    setWasFormSubmitted(true);
     if (
       inputEmailRef.current.value.includes("@") &&
       inputPasswordRef.current.value.length > 7
     ) {
+      setUserSignedUp(true);
+      console.log(`set user signed up`);
       // signUpNewUser({
       //   email: inputEmailRef.current.value,
       //   password: inputPasswordRef.current.value,
       // });
-      navigate("/user/login");
+      // navigate("/user/login");
     }
-    inputEmailRef.current.value = "";
-    inputPasswordRef.current.value = "";
-    checkboxValueRef.current.value = false;
+    // inputEmailRef.current.value = "";
+    // inputPasswordRef.current.value = "";
+    // checkboxValueRef.current.value = false;
   };
   // if (errorMessage) {
   //   return <p>{errorMessage}</p>;
@@ -156,7 +179,14 @@ const SignUpForm = () => {
           <small>You need to agree to terms and conditions</small>
         )}
 
-        <button type="submit">Create an Account</button>
+        <button
+          disabled={
+            isEmailValid && isTermsChecked && isPasswordValid ? false : true
+          }
+          type="submit"
+        >
+          Create an Account
+        </button>
       </form>
     </div>
   );
