@@ -145,7 +145,7 @@ const SignUpForm = () => {
           onChange={inputEmailHandler}
           onBlur={emailBlurHandler}
         />
-        {!isEmailValid && (
+        {!isEmailValid && emailBlur && (
           <small className="invalid">Please enter valid email adress</small>
         )}
         <label htmlFor="password">Password</label>
@@ -157,7 +157,7 @@ const SignUpForm = () => {
           onChange={inputPasswordHandler}
           onBlur={passwordBlurHandler}
         />
-        {!isPasswordValid && (
+        {!isPasswordValid && passwordBlur && (
           <small className="invalid">
             Please enter valid password at least 8 characters
           </small>

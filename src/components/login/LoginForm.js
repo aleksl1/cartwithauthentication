@@ -10,6 +10,7 @@ const LoginForm = () => {
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
   const dispatch = useDispatch();
+  const loggedUserName = useSelector((state) => state.auth.userName);
   // const isLoggedIn = useSelector(state=>state.auth.userIsLoggedIn)
 
   const inputEmailHandler = (e) => {
@@ -30,17 +31,15 @@ const LoginForm = () => {
     if (!inputEmailRef.current.value || !inputPasswordRef.current.value) {
       return null;
     } else {
-      try {
+      dispatch(
         loginNewUser({
           email: inputEmailRef.current.value,
           password: inputPasswordRef.current.value,
-        });
-        dispatch(login());
-        navigate("/");
-      } catch (error) {
-        console.log("error w loginfrom", error);
-        navigate("/error");
-      }
+        })
+      );
+      navigate("/user/authinfo", {
+        state: { action: "Login" },
+      });
     }
   };
 
