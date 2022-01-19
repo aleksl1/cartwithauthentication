@@ -1,4 +1,5 @@
-// import { login } from "./auth-slice";
+import { login } from "./auth-slice";
+
 // import { useDispatch } from "react-redux";
 
 const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
@@ -30,24 +31,48 @@ export const signUpNewUser = (user, responseData) => {
     });
 };
 
-export const loginNewUser = (user) => {
-  console.log(`logging in`);
-  fetch(LOGIN_KEY, {
-    method: "POST",
-    body: JSON.stringify({
-      email: user.email,
-      password: user.password,
-      returnSecureToken: true,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      throw new Error("Login failed");
+// export const loginNewUser = (user) => {
+//   console.log(`logging in`);
+//   fetch(LOGIN_KEY, {
+//     method: "POST",
+//     body: JSON.stringify({
+//       email: user.email,
+//       password: user.password,
+//       returnSecureToken: true,
+//     }),
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   })
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log(data);
+//     })
+//     .catch((error) => {
+//       throw new Error("Login failed");
+//     });
+// };
+
+export const loginNewUser = (userData) => {
+  return async (dispatch) => {
+    const response = await fetch(LOGIN_KEY, {
+      method: "POST",
+      body: JSON.stringify({
+        email: userData.email,
+        password: userData.password,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+    if (!response.ok) {
+      console.log(`error`);
+
+      throw new Error("Login failed");
+    }
+    const data = await response.json();
+    console.log(`data`, data);
+    dispatch(login(data.email));
+  };
 };
