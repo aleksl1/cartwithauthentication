@@ -1,7 +1,9 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
+import { signUpNewUser } from "../../store/auth-actions";
+
+// const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
 
 const SignUpForm = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -13,45 +15,10 @@ const SignUpForm = () => {
   const inputPasswordRef = useRef();
   const checkboxValueRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [wasFormSubmitted, setWasFormSubmitted] = useState(false);
   const [userSignedUp, setUserSignedUp] = useState(false);
   const [signUpFailed, setSignUpFailed] = useState(false);
-
-  const signUpNewUser = useCallback(
-    (user) => {
-      fetch(SIGNUP_KEY, {
-        method: "POST",
-        body: JSON.stringify({
-          email: user.email,
-          password: user.password,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          console.log(`res`, response);
-          if (!response.ok) {
-            console.log(`error in fetch`);
-            setSignUpFailed(true);
-            navigate("/user/authinfo", {
-              state: { action: "SignUp", success: false },
-            });
-            return response.json();
-          } else {
-            navigate("/user/authinfo", {
-              state: { action: "SignUp", success: true },
-            });
-            return response.json();
-          }
-        })
-        .then((data) => {
-          console.log(data);
-        });
-    },
-    [navigate]
-  );
 
   const inputEmailHandler = (e) => {
     setEmailBlur(false);
@@ -98,18 +65,6 @@ const SignUpForm = () => {
     }
   }, [emailBlur, passwordBlur]);
 
-  useEffect(() => {
-    console.log(wasFormSubmitted);
-    console.log(`effect`);
-    if (wasFormSubmitted) {
-      console.log(`effect iffffff`);
-      signUpNewUser({
-        email: inputEmailRef.current.value,
-        password: inputPasswordRef.current.value,
-      });
-    }
-  }, [userSignedUp, wasFormSubmitted, signUpNewUser]);
-
   const submitFormHandler = (e) => {
     e.preventDefault();
     setWasFormSubmitted(true);
@@ -117,21 +72,21 @@ const SignUpForm = () => {
       inputEmailRef.current.value.includes("@") &&
       inputPasswordRef.current.value.length > 7
     ) {
+      dispatch(
+        signUpNewUser({
+          email: inputEmailRef.current.value,
+          password: inputPasswordRef.current.value,
+        })
+      );
+      navigate("/user/authinfo", {
+        state: { action: "SignUp" },
+      });
       setUserSignedUp(true);
-      console.log(`set user signed up`);
-      // signUpNewUser({
-      //   email: inputEmailRef.current.value,
-      //   password: inputPasswordRef.current.value,
-      // });
-      // navigate("/user/login");
     }
     // inputEmailRef.current.value = "";
     // inputPasswordRef.current.value = "";
     // checkboxValueRef.current.value = false;
   };
-  // if (errorMessage) {
-  //   return <p>{errorMessage}</p>;
-  // }
 
   return (
     <div className="container">
