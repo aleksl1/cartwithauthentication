@@ -1,8 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginNewUser } from "../../store/auth-actions";
-import { login } from "../../store/auth-slice";
 
 const LoginForm = () => {
   const [isFormInvalid, setIsFormInvalid] = useState(true);
@@ -10,8 +9,9 @@ const LoginForm = () => {
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
   const dispatch = useDispatch();
-  const loggedUserName = useSelector((state) => state.auth.userName);
+  // const loggedUserName = useSelector((state) => state.auth.userName);
   // const isLoggedIn = useSelector(state=>state.auth.userIsLoggedIn)
+  // const token = useSelector((state) => state.auth.authToken);
 
   const inputEmailHandler = (e) => {
     inputEmailRef.current.value = e.target.value;
@@ -37,6 +37,10 @@ const LoginForm = () => {
           password: inputPasswordRef.current.value,
         })
       );
+
+      // console.log(`local`, token);
+      // localStorage.setItem("token", token);
+
       navigate("/user/authinfo", {
         state: { action: "Login" },
       });

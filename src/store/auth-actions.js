@@ -1,4 +1,4 @@
-import { login, signUp, showStatusMessage, logout } from "./auth-slice";
+import { login, signUp, showStatusMessage } from "./auth-slice";
 
 export const signUpNewUser = (user) => {
   const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
@@ -47,13 +47,49 @@ export const loginNewUser = (userData) => {
     });
     if (!response.ok) {
       const errorMessage = await response.json();
-      dispatch(showStatusMessage({ message: errorMessage.error.message }));
-      dispatch(login({ success: false, status: "failed" }));
+      dispatch(
+        showStatusMessage({
+          message: errorMessage.error.message,
+          loginStatus: "failed",
+        })
+      );
+      // dispatch(login({ success: false, status: "failed" }));
 
       throw new Error(errorMessage.error.message);
     }
     const data = await response.json();
-    dispatch(showStatusMessage({ message: "" }));
-    dispatch(login({ success: true, userName: data.email, status: "success" }));
+    dispatch(showStatusMessage({ message: "", loginStatus: "success" }));
+    dispatch(
+      login({
+        userName: data.email,
+        token: data.idToken,
+      })
+    );
+    console.log(data.idToken);
+    localStorage.setItem("token", data.idToken);
+    localStorage.setItem("userName", data.email);
   };
+};
+
+export const changeUserPassword = async (newPassword, authToken) => {
+  const CHANGE_PASSWORD_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
+  try {
+    const response = await fetch(CHANGE_PASSWORD_KEY, {
+      method: "POST",
+      body: JSON.stringify({
+        idToken: authToken,
+        password: newPassword,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Password change failed");
+    }
+    alert("Password change successfull");
+  } catch (error) {
+    alert(error);
+  }
 };
