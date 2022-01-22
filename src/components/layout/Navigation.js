@@ -6,10 +6,13 @@ import { logout } from "../../store/auth-slice";
 const Navigation = () => {
   const cartAmount = useSelector((state) => state.cart.totalItems);
   const isLoggedIn = useSelector((state) => state.auth.userIsLoggedIn);
+
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     dispatch(logout());
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
   };
 
   return (

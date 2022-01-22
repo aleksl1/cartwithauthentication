@@ -9,6 +9,7 @@ import LoginForm from "./components/login/LoginForm";
 import SignUpForm from "./components/login/SignUpForm";
 import ResetPassword from "./components/login/ResetPassword";
 import Payment from "./components/cart/Payment";
+
 import "./App.css";
 import "@picocss/pico";
 import UserProfilePage from "./pages/UserProfilePage";
@@ -30,7 +31,11 @@ function App() {
         <Route path="user/authinfo" element={<AuthInformation />} />
         <Route
           path="user/profile"
-          element={isLoggedIn ? <UserProfilePage /> : <ErrorPage />}
+          element={isLoggedIn && <UserProfilePage />}
+        />
+        <Route
+          path="user/profile/reset"
+          element={isLoggedIn && <ResetPassword />}
         />
         <Route path="user/signup" element={<SignUpForm />} />
         <Route path="user/signup/terms" element={<ErrorPage />} />
