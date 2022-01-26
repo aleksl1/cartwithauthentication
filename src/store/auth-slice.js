@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialToken = localStorage.getItem("token");
 const initialUserName = localStorage.getItem("userName");
+const initialUserId = localStorage.getItem("userId");
 const initialState = {
   userIsLoggedIn: !!initialToken,
   userName: initialUserName,
@@ -8,6 +9,7 @@ const initialState = {
   loginStatus: "waiting",
   statusMessage: "",
   authToken: initialToken,
+  userId: initialUserId,
 };
 
 export const authSlice = createSlice({
@@ -21,6 +23,7 @@ export const authSlice = createSlice({
       state.userIsLoggedIn = !!action.payload.token;
       state.userName = action.payload.userName;
       state.authToken = action.payload.token;
+      state.userId = action.payload.userId;
     },
     logout: (state) => {
       state.userIsLoggedIn = false;

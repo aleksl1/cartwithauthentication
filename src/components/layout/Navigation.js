@@ -13,6 +13,7 @@ const Navigation = () => {
     dispatch(logout());
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
   };
 
   return (
