@@ -10,6 +10,7 @@ const Items = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchItems = useCallback(async () => {
+    console.log(`fetch items`);
     setIsLoading(true);
     try {
       const response = await fetch(DB_URL);

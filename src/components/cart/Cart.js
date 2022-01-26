@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCart } from "../../store/cart-slice";
 import { Link } from "react-router-dom";
+import { loadUserCart, updateUserCart } from "../../store/cart-fetch";
 import CartItem from "./CartItem";
 
 const Cart = () => {
@@ -12,10 +13,16 @@ const Cart = () => {
   const totalItems = useSelector((state) => state.cart.totalItems);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const cartItems = useSelector((state) => state.cart.items);
+  const userId = useSelector((state) => state.auth.userId);
 
   useEffect(() => {
     dispatch(toggleCart(true));
-  }, [dispatch]);
+    loadUserCart(userId);
+  }, [dispatch, userId]);
+
+  // useEffect(() => {
+  //   updateUserCart(userId, cartItems);
+  // }, [userId, cartItems]);
 
   const showCartItems = cartItems.map((item) => (
     <CartItem
@@ -30,10 +37,12 @@ const Cart = () => {
   const cartCloseHandler = () => {
     dispatch(toggleCart(false));
     navigate("/");
+    updateUserCart(userId, cartItems);
   };
   const cartPaymentHandler = () => {
     dispatch(toggleCart(false));
     navigate("/cart/payment");
+    updateUserCart(userId, cartItems);
   };
 
   if (!isCartVisible) {

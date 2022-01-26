@@ -16,9 +16,9 @@ const SignUpForm = () => {
   const checkboxValueRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [wasFormSubmitted, setWasFormSubmitted] = useState(false);
-  const [userSignedUp, setUserSignedUp] = useState(false);
-  const [signUpFailed, setSignUpFailed] = useState(false);
+  // const [wasFormSubmitted, setWasFormSubmitted] = useState(false);
+  // const [userSignedUp, setUserSignedUp] = useState(false);
+  // const [signUpFailed, setSignUpFailed] = useState(false);
 
   const inputEmailHandler = (e) => {
     setEmailBlur(false);
@@ -67,7 +67,7 @@ const SignUpForm = () => {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
-    setWasFormSubmitted(true);
+    // setWasFormSubmitted(true);
     if (
       inputEmailRef.current.value.includes("@") &&
       inputPasswordRef.current.value.length > 7
@@ -81,7 +81,7 @@ const SignUpForm = () => {
       navigate("/user/authinfo", {
         state: { action: "SignUp" },
       });
-      setUserSignedUp(true);
+      // setUserSignedUp(true);
     }
     // inputEmailRef.current.value = "";
     // inputPasswordRef.current.value = "";

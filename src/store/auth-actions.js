@@ -1,5 +1,5 @@
 import { login, signUp, showStatusMessage } from "./auth-slice";
-
+import { createNewUserCart } from "./cart-fetch";
 export const signUpNewUser = (user) => {
   const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
   return async (dispatch) => {
@@ -27,6 +27,7 @@ export const signUpNewUser = (user) => {
       throw new Error(errorMessage.error.message);
     }
     dispatch(signUp({ status: "success" }));
+    // createNewUserCart(user.email);
   };
 };
 
@@ -63,11 +64,12 @@ export const loginNewUser = (userData) => {
       login({
         userName: data.email,
         token: data.idToken,
+        userId: data.localId,
       })
     );
-    console.log(data.idToken);
     localStorage.setItem("token", data.idToken);
     localStorage.setItem("userName", data.email);
+    localStorage.setItem("userId", data.localId);
   };
 };
 
