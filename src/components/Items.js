@@ -1,19 +1,24 @@
 import ItemCard from "../components/ItemCard";
 import LoadingSpinner from "./LoadingSpinner";
 import { useEffect, useState, useCallback } from "react";
-
-const DB_URL = `https://shopjs-fc7ef-default-rtdb.europe-west1.firebasedatabase.app/Items.json`;
+import { useSelector } from "react-redux";
 
 const Items = () => {
   const [items, setItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const {
+    totalItems,
+    totalPrice,
+    items: itemsInCart,
+  } = useSelector((state) => state.cart);
 
   const fetchItems = useCallback(async () => {
-    console.log(`fetch items`);
     setIsLoading(true);
     try {
-      const response = await fetch(DB_URL);
+      const response = await fetch(
+        `https://shopjs-fc7ef-default-rtdb.europe-west1.firebasedatabase.app/Products.json`
+      );
       if (!response.ok) {
         throw new Error("Can not load available items");
       }
@@ -21,10 +26,12 @@ const Items = () => {
       let itemsArr = [];
       for (const key in data) {
         itemsArr.push({
-          name: data[key].name,
+          name: data[key].title,
           id: data[key].id,
           price: data[key].price,
           description: data[key].description,
+          category: data[key].category,
+          image: data[key].image,
         });
       }
       setItems(itemsArr);
@@ -39,6 +46,14 @@ const Items = () => {
     fetchItems();
   }, [fetchItems]);
 
+  useEffect(() => {
+    if (itemsInCart.length > 0) {
+      localStorage.setItem("totalItems", `${totalItems}`);
+      localStorage.setItem("totalPrice", `${totalPrice}`);
+      localStorage.setItem("items", `${JSON.stringify(itemsInCart)}`);
+    }
+  }, [totalItems, totalPrice, itemsInCart]);
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
@@ -52,6 +67,8 @@ const Items = () => {
             name={item.name}
             price={item.price}
             description={item.description}
+            category={item.category}
+            image={item.image}
           />
         ))}
     </>

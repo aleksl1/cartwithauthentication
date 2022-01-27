@@ -1,15 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItemToCart } from "../store/cart-slice";
-import { updateUserCart } from "../store/cart-fetch";
-import { useEffect } from "react";
-
-// let wasMounted = false;
 
 const ItemCard = (props) => {
   const dispatch = useDispatch();
-  // const userId = useSelector((state) => state.auth.userId);
-  // const cartItems = useSelector((state) => state.cart.items);
-
   const addToCartHandler = () => {
     dispatch(
       addItemToCart({
@@ -20,18 +13,6 @@ const ItemCard = (props) => {
       })
     );
   };
-  // useEffect(() => {
-  //   if (!userId) {
-  //     return;
-  //   }
-  //   if (cartItems === []) {
-  //     return;
-  //   }
-  //   if (wasMounted === true) {
-  //     updateUserCart(userId, cartItems);
-  //   }
-  //   wasMounted = true;
-  // }, [userId, cartItems]);
 
   return (
     <article className="item-card" key={props.id}>
