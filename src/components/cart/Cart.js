@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCart } from "../../store/cart-slice";
 import { Link } from "react-router-dom";
@@ -20,9 +20,15 @@ const Cart = () => {
     loadUserCart(userId);
   }, [dispatch, userId]);
 
-  // useEffect(() => {
-  //   updateUserCart(userId, cartItems);
-  // }, [userId, cartItems]);
+  const updateCartInBrowserStorage = useCallback(() => {
+    localStorage.setItem("totalItems", `${totalItems}`);
+    localStorage.setItem("totalPrice", `${totalPrice}`);
+    localStorage.setItem("items", `${JSON.stringify(cartItems)}`);
+  }, [totalItems, totalPrice, cartItems]);
+
+  useEffect(() => {
+    updateCartInBrowserStorage();
+  }, [updateCartInBrowserStorage]);
 
   const showCartItems = cartItems.map((item) => (
     <CartItem
@@ -31,6 +37,7 @@ const Cart = () => {
       name={item.name}
       price={item.price}
       amount={item.amount}
+      updateCart={updateCartInBrowserStorage}
     />
   ));
 
