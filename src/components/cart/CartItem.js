@@ -5,9 +5,6 @@ const CartItem = (props) => {
   const dispatch = useDispatch();
   const { totalItems, items: itemsInCart } = useSelector((state) => state.cart);
 
-  // const test = JSON.parse(localStorage.getItem("items"));
-  // console.log("test", test);
-
   const removeOneFromCartHandler = () => {
     if (totalItems === 1) {
       localStorage.removeItem("totalItems");
@@ -40,14 +37,30 @@ const CartItem = (props) => {
   return (
     <div className="cart-item" key={props.id}>
       <div className="cart-item-data">
-        <span>{props.name}</span>
-        <span>x {props.amount}</span>
-        <span>{props.price * props.amount}$</span>
+        <div className="cart-item-image">
+          <img src={props.image} alt="" />
+        </div>
+        <span className="cart-item-amount">{props.amount} for</span>
+        <span className="cart-item-total">
+          {(props.price * props.amount).toFixed(2)}$
+        </span>
       </div>
       <div className="cart-item-actions">
-        <span onClick={removeOneFromCartHandler}>-</span>
-        <span onClick={addOneToCartHandler}>+</span>
-        <span onClick={removeRecordFromCartHandler}>Delete</span>
+        <span
+          className="cart-item-actions-remove"
+          onClick={removeOneFromCartHandler}
+        >
+          -
+        </span>
+        <span className="cart-item-actions-add" onClick={addOneToCartHandler}>
+          +
+        </span>
+        <span
+          className="cart-item-actions-delete secondary"
+          onClick={removeRecordFromCartHandler}
+        >
+          +
+        </span>
       </div>
     </div>
   );

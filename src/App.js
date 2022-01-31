@@ -15,6 +15,7 @@ import "@picocss/pico";
 import UserProfilePage from "./pages/UserProfilePage";
 import { useSelector } from "react-redux";
 import AuthInformation from "./components/login/AuthInformation";
+import ItemDetailsPage from "./components/items/ItemDetailsPage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.userIsLoggedIn);
@@ -24,6 +25,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<FrontPage />} />
+        <Route path="/details/:productId" element={<ItemDetailsPage />} />
         <Route path="user" element={<LoginPage />} />
         <Route path="cart" element={<Cart />} />
         <Route path="cart/payment" element={<Payment />} />

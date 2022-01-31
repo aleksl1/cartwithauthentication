@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/auth-slice";
 import "./Navigation.css";
 import { FaCartPlus } from "react-icons/fa";
+import Logo from "./Logo";
 
 const Navigation = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
@@ -36,45 +37,57 @@ const Navigation = () => {
   return (
     <div className="nav-container">
       <div className="nav-mobile">
-        <nav></nav>
         <div className="burger-menu" onClick={toggleMobileNavHandler}>
           <div className="burger-top" animate={animateValue}></div>
           <div className="burger-mid" animate={animateValue}></div>
           <div className="burger-bot" animate={animateValue}></div>
         </div>
+        <Logo />
         <div className="cart-mobile">
-          <div className="cart-icon-container">
-            <NavLink className="cart-icon" to="cart">
-              <FaCartPlus />
-            </NavLink>
+          <NavLink className="cart-icon" to="cart">
+            <FaCartPlus />
+
             {cartAmount > 0 ? (
               <span className="cart-icon-number">{cartAmount}</span>
             ) : null}
-          </div>
+          </NavLink>
         </div>
       </div>
-
+      {showMobileNav && (
+        <nav className="menu-mobile">
+          <ul className="menu-mobile-list">
+            <li className="menu-mobile-item">
+              <NavLink to="/">Shop</NavLink>
+            </li>
+            <li className="menu-mobile-item">
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
+            <li className="menu-mobile-item">
+              <NavLink to="/user/profile">Profile</NavLink>
+            </li>
+            <li className="menu-mobile-item">Logout</li>
+          </ul>
+        </nav>
+      )}
       <nav className="nav-desktop">
         <ul>
-          <li>
-            <strong>Super Store</strong>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <NavLink to="/">Shop</NavLink>
-          </li>
           <li className="cart-number-container">
             <NavLink to="cart">Cart</NavLink>
             {cartAmount > 0 ? (
               <span className="cart-number">{cartAmount}</span>
             ) : null}
           </li>
-          <li>
-            <NavLink to="/">Contact</NavLink>
-          </li>
         </ul>
+        <div className="desktop-logo-container">
+          <Logo />
+        </div>
         <ul>
+          <li>
+            <NavLink to="/">Shop</NavLink>
+          </li>
+          <li>
+            <NavLink to="/contact">Contact</NavLink>
+          </li>
           {isLoggedIn && (
             <li>
               <NavLink to="/user/profile">Profile</NavLink>

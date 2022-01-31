@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
+
+.store-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  line-height: 60px;
+  font-family: "Gloria Hallelujah", cursive;
+}
+@media (max-width: 992px) {
+  .store-logo {
+    font-size: 2rem;
+    left: 40%;
+  }
+}
+@media (max-width: 768px) {
+  .store-logo {
+    font-size: 1.7rem;
+    left: 35%;
+  }
+}
+@media (max-width: 576px) {
+  .store-logo {
+    font-size: 1.5rem;
+    left: 50%;
+  }
+}
