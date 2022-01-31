@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { showStatusMessage } from "../../store/auth-slice";
-import LoadingSpinner from "../LoadingSpinner";
+import LoadingSpinner from "../layout/LoadingSpinner";
 
 const AuthInformation = () => {
   const location = useLocation();

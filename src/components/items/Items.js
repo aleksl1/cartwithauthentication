@@ -1,7 +1,8 @@
-import ItemCard from "../components/ItemCard";
-import LoadingSpinner from "./LoadingSpinner";
+import ItemCard from "./ItemCard";
+import LoadingSpinner from "../layout/LoadingSpinner";
 import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
+import "./Items.css";
 
 const Items = () => {
   const [items, setItems] = useState([]);
@@ -55,7 +56,7 @@ const Items = () => {
   }, [totalItems, totalPrice, itemsInCart]);
 
   return (
-    <>
+    <div className="container items-display">
       {isLoading && <LoadingSpinner />}
       {errorMessage ? errorMessage : ""}
       {!errorMessage &&
@@ -71,7 +72,7 @@ const Items = () => {
             image={item.image}
           />
         ))}
-    </>
+    </div>
   );
 };
 

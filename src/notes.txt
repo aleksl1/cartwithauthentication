@@ -1,0 +1,2 @@
+niezalogowany -> koszyk -> koszyk tymczasowy dla niezalogowanego -> 
+-> loguje się lub rejestruje -> koszyk tymczasowy wysyłany do db
