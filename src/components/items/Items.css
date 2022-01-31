@@ -78,3 +78,8 @@
     flex-basis: 80%;
   }
 }
+
+.item-details {
+  width: 70vw;
+  height: 70vh;
+}

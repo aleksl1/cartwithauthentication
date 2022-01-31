@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCart } from "../../store/cart-slice";
 import { Link } from "react-router-dom";
 import { loadUserCart, updateUserCart } from "../../store/cart-fetch";
 import CartItem from "./CartItem";
+import "./Cart.css";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Cart = () => {
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const cartItems = useSelector((state) => state.cart.items);
   const userId = useSelector((state) => state.auth.userId);
-
+  const userName = useSelector((state) => state.auth.userName);
   useEffect(() => {
     dispatch(toggleCart(true));
     loadUserCart(userId);
@@ -37,6 +38,7 @@ const Cart = () => {
       name={item.name}
       price={item.price}
       amount={item.amount}
+      image={item.image}
       updateCart={updateCartInBrowserStorage}
     />
   ));
@@ -67,7 +69,7 @@ const Cart = () => {
             className="close secondary"
           ></span>
           <div className="cart-data">
-            <h5>Cart</h5>
+            <h5>{userName ? `Cart of ${userName}` : "Cart"}</h5>
           </div>
         </header>
         {totalItems === 0 ? (
@@ -76,7 +78,7 @@ const Cart = () => {
           <div className="container">
             <div className="cart-items-container">{showCartItems}</div>
             <span>
-              You have {totalItems} items in cart. For {totalPrice}$
+              You have {totalItems} items in cart. For {totalPrice.toFixed(2)}$
             </span>
           </div>
         )}

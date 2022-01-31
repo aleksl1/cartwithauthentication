@@ -6,9 +6,20 @@
 .nav-mobile {
   display: none;
 }
+.menu-mobile {
+  display: none;
+}
 .nav-desktop {
   margin: 0 auto;
   max-width: 1024px;
+  position: relative;
+}
+.desktop-logo-container {
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 .cart-number-container {
   position: relative;
@@ -29,17 +40,23 @@
 }
 @media (max-width: 576px) {
   .nav-container {
-    background-color: transparent;
-    box-shadow: none;
+    background-color: rgba(165, 165, 165, 0.383);
+    padding: 0;
+    margin: 0;
   }
   .nav-desktop {
     display: none;
   }
   .nav-mobile {
     display: flex;
-  }
-  .cart-icon-container {
     position: relative;
+    width: 100%;
+    height: 60px;
+  }
+  .cart-mobile {
+    position: absolute;
+    top: -5px;
+    left: 0;
     width: 60px;
     height: 60px;
   }
@@ -48,7 +65,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 50px;
+    font-size: 2.5rem;
+    padding: 0;
+    background-color: transparent;
   }
   .cart-icon-number {
     display: block;
@@ -56,17 +75,19 @@
     top: 56%;
     left: 56%;
     transform: translate(-50%, -50%);
-    z-index: 999;
     color: white;
     background-color: #1095c1;
-    width: 25px;
-    line-height: 20px;
     text-align: center;
-    font-size: 17px;
+    font-size: 0.7rem;
+    min-width: 15px;
+    line-height: 15px;
     font-weight: bold;
   }
   .burger-menu {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 40px);
+    transform: translate(-50%, -50%);
     width: 40px;
     height: 45px;
     background-color: #1b2832;
@@ -114,6 +135,19 @@
   }
   .burger-menu div.burger-bot[animate="2"] {
     animation: burger-bot-reverse 1s linear 1 forwards;
+  }
+  .menu-mobile {
+    display: block;
+    border-top: 1px solid rgba(128, 128, 128, 0.52);
+  }
+  .menu-mobile-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .menu-mobile-item {
+    flex-basis: 100%;
+    text-align: center;
   }
 }
 @keyframes burger-top {
