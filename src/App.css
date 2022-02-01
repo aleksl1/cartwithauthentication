@@ -26,3 +26,13 @@ Viewport	100%	540px	720px	960px	1140px */
 .invalid {
   color: rgb(248, 121, 121);
 }
+
+/* error page styles */
+.error-page {
+  margin: 0 auto;
+  width: 85%;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+}

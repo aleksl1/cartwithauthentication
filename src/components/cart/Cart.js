@@ -45,7 +45,7 @@ const Cart = () => {
 
   const cartCloseHandler = () => {
     dispatch(toggleCart(false));
-    navigate("/");
+    navigate(-1);
     updateUserCart(userId, cartItems);
   };
   const cartPaymentHandler = () => {

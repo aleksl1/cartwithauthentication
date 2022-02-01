@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginNewUser } from "../../store/auth-actions";
 
 const LoginForm = () => {
@@ -9,9 +9,6 @@ const LoginForm = () => {
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
   const dispatch = useDispatch();
-  // const loggedUserName = useSelector((state) => state.auth.userName);
-  // const isLoggedIn = useSelector(state=>state.auth.userIsLoggedIn)
-  // const token = useSelector((state) => state.auth.authToken);
 
   const inputEmailHandler = (e) => {
     inputEmailRef.current.value = e.target.value;
@@ -77,7 +74,7 @@ const LoginForm = () => {
           )}
         </p> */}
         <small>
-          <Link to="reset">Forgot your password?</Link>
+          <Link to="/user/resend">Forgot your password?</Link>
         </small>
         <p>
           <small>

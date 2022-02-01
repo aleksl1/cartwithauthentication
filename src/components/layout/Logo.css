@@ -9,6 +9,7 @@
   line-height: 60px;
   font-family: "Gloria Hallelujah", cursive;
 }
+
 @media (max-width: 992px) {
   .store-logo {
     font-size: 2rem;

@@ -33,16 +33,28 @@ function App() {
         <Route path="user/authinfo" element={<AuthInformation />} />
         <Route
           path="user/profile"
-          element={isLoggedIn && <UserProfilePage />}
+          element={
+            isLoggedIn ? (
+              <UserProfilePage />
+            ) : (
+              <ErrorPage message={`Log in to see Your profile!`} />
+            )
+          }
         />
         <Route
           path="user/profile/reset"
           element={isLoggedIn && <ResetPassword />}
         />
         <Route path="user/signup" element={<SignUpForm />} />
-        <Route path="user/signup/terms" element={<ErrorPage />} />
-        <Route path="user/login/reset" element={<ResetPassword />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route
+          path="user/signup/terms"
+          element={<ErrorPage message={`No terms at this time`} />}
+        />
+        <Route path="user/resend" element={<ErrorPage message={"TBD"} />} />
+        <Route
+          path="*"
+          element={<ErrorPage message={`This path doesn't exist`} />}
+        />
       </Routes>
     </>
   );
