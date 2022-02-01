@@ -14,13 +14,6 @@
   max-width: 1024px;
   position: relative;
 }
-.desktop-logo-container {
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-}
 .cart-number-container {
   position: relative;
 }
@@ -72,7 +65,7 @@
   .cart-icon-number {
     display: block;
     position: absolute;
-    top: 56%;
+    top: 54%;
     left: 56%;
     transform: translate(-50%, -50%);
     color: white;
@@ -97,7 +90,6 @@
   .burger-menu div {
     position: absolute;
     left: 7px;
-    /* transform: translate(-50%, -50%); */
     width: 26px;
     height: 3px;
     background-color: white;
@@ -105,36 +97,33 @@
   .burger-menu div.burger-top {
     top: 70%;
     transform: translateY(-50%);
-    /* animation: burger-top 1s linear 0.2s infinite; */
   }
   .burger-menu div.burger-mid {
     top: 50%;
     transform: translateY(-50%);
-    /* animation: burger-mid 1s linear 0.2s infinite; */
   }
   .burger-menu div.burger-bot {
     top: 30%;
     transform: translateY(-50%);
-    /* animation: burger-bot 1s linear 0.2s infinite; */
   }
   .burger-menu div.burger-top[animate="1"] {
-    animation: burger-top 1s linear 1 forwards;
+    animation: burger-top 0.2s linear 1 forwards;
   }
   .burger-menu div.burger-mid[animate="1"] {
-    animation: burger-mid 1s linear 1 forwards;
+    animation: burger-mid 0.2s linear 1 forwards;
   }
   .burger-menu div.burger-bot[animate="1"] {
-    animation: burger-bot 1s linear 1 forwards;
+    animation: burger-bot 0.2s linear 1 forwards;
   }
 
   .burger-menu div.burger-top[animate="2"] {
-    animation: burger-top-reverse 1s linear 1 forwards;
+    animation: burger-top-reverse 0.2s linear 1 forwards;
   }
   .burger-menu div.burger-mid[animate="2"] {
-    animation: burger-mid-reverse 1s linear 1 forwards;
+    animation: burger-mid-reverse 0.2s linear 1 forwards;
   }
   .burger-menu div.burger-bot[animate="2"] {
-    animation: burger-bot-reverse 1s linear 1 forwards;
+    animation: burger-bot-reverse 0.2s linear 1 forwards;
   }
   .menu-mobile {
     display: block;

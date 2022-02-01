@@ -65,7 +65,15 @@ const Navigation = () => {
             <li className="menu-mobile-item">
               <NavLink to="/user/profile">Profile</NavLink>
             </li>
-            <li className="menu-mobile-item">Logout</li>
+            <li className="menu-mobile-item">
+              {isLoggedIn ? (
+                <NavLink to="/" onClick={logoutHandler}>
+                  Logout
+                </NavLink>
+              ) : (
+                <NavLink to="user">Login</NavLink>
+              )}
+            </li>
           </ul>
         </nav>
       )}
@@ -78,9 +86,9 @@ const Navigation = () => {
             ) : null}
           </li>
         </ul>
-        <div className="desktop-logo-container">
-          <Logo />
-        </div>
+
+        <Logo />
+
         <ul>
           <li>
             <NavLink to="/">Shop</NavLink>
