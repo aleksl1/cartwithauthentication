@@ -1,5 +1,5 @@
 import { login, signUp, showStatusMessage } from "./auth-slice";
-import { createNewUserCart } from "./cart-fetch";
+
 export const signUpNewUser = (user) => {
   const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
   return async (dispatch) => {

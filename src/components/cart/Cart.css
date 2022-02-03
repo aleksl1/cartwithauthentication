@@ -68,6 +68,11 @@ dialog article.cart {
   font-size: 2.5rem;
   transform: rotate(45deg);
 }
+button.cart-actions-btn {
+  display: inline-block;
+  width: 30%;
+  margin: 0.5rem;
+}
 
 @media (max-width: 997px) {
   dialog article.cart {

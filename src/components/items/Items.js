@@ -17,45 +17,47 @@ const Items = () => {
   } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    const fetchItems = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          `https://shopjs-fc7ef-default-rtdb.europe-west1.firebasedatabase.app/Products.json`
-        );
-        if (!response.ok) {
-          throw new Error("Can not load available items");
-        }
-        const data = await response.json();
-        let itemsArr = [];
-        for (const key in data) {
-          itemsArr.push({
-            name: data[key].title,
-            id: data[key].id,
-            price: data[key].price,
-            description: data[key].description,
-            category: data[key].category,
-            image: data[key].image,
-          });
-        }
-        dispatch(setItems(itemsArr));
-      } catch (error) {
-        setErrorMessage(error.message);
-      }
-
-      setIsLoading(false);
-    };
     if (items.length === 0) {
+      const fetchItems = async () => {
+        setIsLoading(true);
+        try {
+          const response = await fetch(
+            `https://shopjs-fc7ef-default-rtdb.europe-west1.firebasedatabase.app/Products.json`
+          );
+          if (!response.ok) {
+            throw new Error("Can not load available items");
+          }
+          const data = await response.json();
+          let itemsArr = [];
+          for (const key in data) {
+            itemsArr.push({
+              name: data[key].title,
+              id: data[key].id,
+              price: data[key].price,
+              description: data[key].description,
+              category: data[key].category,
+              image: data[key].image,
+            });
+          }
+          dispatch(setItems(itemsArr));
+        } catch (error) {
+          setErrorMessage(error.message);
+        }
+
+        setIsLoading(false);
+      };
       fetchItems();
     }
+    return () => {};
   }, [dispatch, items]);
 
   useEffect(() => {
     if (itemsInCart.length > 0) {
       localStorage.setItem("totalItems", `${totalItems}`);
-      localStorage.setItem("totalPrice", `${totalPrice}`);
+      localStorage.setItem("totalPrice", `${totalPrice.toFixed(2)}`);
       localStorage.setItem("items", `${JSON.stringify(itemsInCart)}`);
     }
+    return () => {};
   }, [totalItems, totalPrice, itemsInCart]);
 
   return (

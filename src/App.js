@@ -8,7 +8,7 @@ import Cart from "./components/cart/Cart";
 import LoginForm from "./components/login/LoginForm";
 import SignUpForm from "./components/login/SignUpForm";
 import ResetPassword from "./components/login/ResetPassword";
-import Payment from "./components/cart/Payment";
+import PaymentPage from "./pages/PaymentPage";
 
 import "./App.css";
 import "@picocss/pico";
@@ -28,7 +28,7 @@ function App() {
         <Route path="/details/:productId" element={<ItemDetailsPage />} />
         <Route path="user" element={<LoginPage />} />
         <Route path="cart" element={<Cart />} />
-        <Route path="cart/payment" element={<Payment />} />
+        <Route path="cart/payment" element={<PaymentPage />} />
         <Route path="user/login" element={<LoginForm />} />
         <Route path="user/authinfo" element={<AuthInformation />} />
         <Route
