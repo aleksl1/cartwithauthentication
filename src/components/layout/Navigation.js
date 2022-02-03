@@ -15,13 +15,15 @@ const Navigation = () => {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    dispatch(logout());
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     localStorage.removeItem("userId");
+    localStorage.removeItem("totalItems");
+    localStorage.removeItem("totalPrice");
+    localStorage.removeItem("items");
+    dispatch(logout());
   };
   const toggleMobileNavHandler = () => {
-    console.log(`set`);
     setWasToggled(true);
     setShowMobileNav((prevState) => !prevState);
   };
@@ -33,6 +35,9 @@ const Navigation = () => {
   if (wasToggled && !showMobileNav) {
     animateValue = "2";
   }
+  const menuItemClickHandler = () => {
+    setShowMobileNav(false);
+  };
 
   return (
     <div className="nav-container">
@@ -55,9 +60,12 @@ const Navigation = () => {
       </div>
       {showMobileNav && (
         <nav className="menu-mobile">
-          <ul className="menu-mobile-list">
+          <ul className="menu-mobile-list" onClick={menuItemClickHandler}>
             <li className="menu-mobile-item">
               <NavLink to="/">Shop</NavLink>
+            </li>
+            <li className="menu-mobile-item">
+              <NavLink to="/cart">Cart</NavLink>
             </li>
             <li className="menu-mobile-item">
               <NavLink to="/contact">Contact</NavLink>
@@ -78,12 +86,17 @@ const Navigation = () => {
         </nav>
       )}
       <nav className="nav-desktop">
-        <ul>
-          <li className="cart-number-container">
+        <ul className="cart-list">
+          <li>
+            <NavLink className="cart-icon" to="cart">
+              <FaCartPlus />
+              {cartAmount > 0 ? (
+                <span className="cart-number">{cartAmount}</span>
+              ) : null}
+            </NavLink>
+          </li>
+          <li className="cart-link">
             <NavLink to="cart">Cart</NavLink>
-            {cartAmount > 0 ? (
-              <span className="cart-number">{cartAmount}</span>
-            ) : null}
           </li>
         </ul>
 

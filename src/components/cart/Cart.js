@@ -2,8 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCart } from "../../store/cart-slice";
-import { Link } from "react-router-dom";
-import { loadUserCart, updateUserCart } from "../../store/cart-fetch";
 import CartItem from "./CartItem";
 import "./Cart.css";
 
@@ -14,17 +12,22 @@ const Cart = () => {
   const totalItems = useSelector((state) => state.cart.totalItems);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const cartItems = useSelector((state) => state.cart.items);
-  const userId = useSelector((state) => state.auth.userId);
   const userName = useSelector((state) => state.auth.userName);
+
   useEffect(() => {
     dispatch(toggleCart(true));
-    loadUserCart(userId);
-  }, [dispatch, userId]);
+  }, [dispatch]);
 
   const updateCartInBrowserStorage = useCallback(() => {
-    localStorage.setItem("totalItems", `${totalItems}`);
-    localStorage.setItem("totalPrice", `${totalPrice}`);
-    localStorage.setItem("items", `${JSON.stringify(cartItems)}`);
+    if (totalItems !== 0) {
+      localStorage.setItem("totalItems", `${totalItems}`);
+      localStorage.setItem("totalPrice", `${totalPrice.toFixed(2)}`);
+      localStorage.setItem("items", `${JSON.stringify(cartItems)}`);
+    } else if (totalItems === 0) {
+      localStorage.removeItem("totalItems");
+      localStorage.removeItem("totalPrice");
+      localStorage.removeItem("items");
+    }
   }, [totalItems, totalPrice, cartItems]);
 
   useEffect(() => {
@@ -40,18 +43,17 @@ const Cart = () => {
       amount={item.amount}
       image={item.image}
       updateCart={updateCartInBrowserStorage}
+      inCart={true}
     />
   ));
 
   const cartCloseHandler = () => {
     dispatch(toggleCart(false));
     navigate(-1);
-    updateUserCart(userId, cartItems);
   };
   const cartPaymentHandler = () => {
     dispatch(toggleCart(false));
     navigate("/cart/payment");
-    updateUserCart(userId, cartItems);
   };
 
   if (!isCartVisible) {
@@ -85,23 +87,19 @@ const Cart = () => {
 
         <footer>
           <div className="cart-actions">
-            <Link
+            <button
+              className="cart-actions-btn"
               disabled={totalItems === 0 ? true : false}
-              to="payment"
-              role="button"
               onClick={cartPaymentHandler}
             >
               Payment
-            </Link>
-            <Link
-              to="/"
-              href="#"
-              role="button"
+            </button>
+            <button
               onClick={cartCloseHandler}
-              className="secondary"
+              className="secondary cart-actions-btn"
             >
               Close
-            </Link>
+            </button>
           </div>
         </footer>
       </article>

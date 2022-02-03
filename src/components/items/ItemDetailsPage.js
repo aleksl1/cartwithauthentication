@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { addItemToCart } from "../../store/cart-slice";
+import "./ItemDetails.css";
 
 const ItemDetailsPage = () => {
   const [currentItem, setCurrentItem] = useState({});

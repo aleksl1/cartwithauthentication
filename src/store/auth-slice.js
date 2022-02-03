@@ -32,6 +32,7 @@ export const authSlice = createSlice({
       state.loginStatus = "waiting";
       state.signUpStatus = "waiting";
       state.authToken = null;
+      state.userId = null;
     },
     showStatusMessage: (state, action) => {
       state.statusMessage = action.payload.message;

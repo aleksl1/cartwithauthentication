@@ -4,9 +4,11 @@ import Items from "../components/items/Items";
 const FrontPage = (props) => {
   return (
     <React.Fragment>
-      <div className="container introduction"></div>
-
-      <Items />
+      <div className="front-page-background">
+        <div className="front-page-filters">
+          <Items />
+        </div>
+      </div>
     </React.Fragment>
   );
 };

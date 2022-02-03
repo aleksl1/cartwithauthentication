@@ -56,8 +56,10 @@ export const cartSlice = createSlice({
         }
       }
     },
-    clearCart: () => {
-      console.log(`clearing`);
+    initializeCart: (state, action) => {
+      state.totalItems = action.payload.totalItems;
+      state.totalPrice = action.payload.totalPrice;
+      state.items = [...action.payload.items];
     },
     toggleCart: (state, action) => {
       state.isVisible = action.payload;
@@ -65,7 +67,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItemToCart, removeItemFromCart, clearCart, toggleCart } =
+export const { addItemToCart, removeItemFromCart, initializeCart, toggleCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -45,23 +45,25 @@ const CartItem = (props) => {
           {(props.price * props.amount).toFixed(2)}$
         </span>
       </div>
-      <div className="cart-item-actions">
-        <span
-          className="cart-item-actions-remove"
-          onClick={removeOneFromCartHandler}
-        >
-          -
-        </span>
-        <span className="cart-item-actions-add" onClick={addOneToCartHandler}>
-          +
-        </span>
-        <span
-          className="cart-item-actions-delete secondary"
-          onClick={removeRecordFromCartHandler}
-        >
-          +
-        </span>
-      </div>
+      {props.inCart ? (
+        <div className="cart-item-actions">
+          <span
+            className="cart-item-actions-remove"
+            onClick={removeOneFromCartHandler}
+          >
+            -
+          </span>
+          <span className="cart-item-actions-add" onClick={addOneToCartHandler}>
+            +
+          </span>
+          <span
+            className="cart-item-actions-delete secondary"
+            onClick={removeRecordFromCartHandler}
+          >
+            +
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };
