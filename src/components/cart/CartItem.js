@@ -63,7 +63,11 @@ const CartItem = (props) => {
             +
           </span>
         </div>
-      ) : null}
+      ) : (
+        <div className="cart-item-name">
+          <p>{props.name}</p>
+        </div>
+      )}
     </div>
   );
 };
