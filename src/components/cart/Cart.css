@@ -22,7 +22,6 @@ dialog article.cart {
 
 .cart-item .cart-item-data {
   flex-basis: 50%;
-  justify-self: flex-start;
   display: flex;
 }
 .cart-item-image,
@@ -129,4 +128,12 @@ button.cart-actions-btn {
     line-height: 35px;
     margin: 1px;
   }
+}
+.cart-item-name {
+  flex-basis: 48%;
+  font-size: 0.8rem;
+  align-self: center;
+}
+.cart-item-name p {
+  margin: 0;
 }

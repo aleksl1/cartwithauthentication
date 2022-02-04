@@ -9,6 +9,7 @@ import LoginForm from "./components/login/LoginForm";
 import SignUpForm from "./components/login/SignUpForm";
 import ResetPassword from "./components/login/ResetPassword";
 import PaymentPage from "./pages/PaymentPage";
+import Footer from "./components/layout/Footer";
 
 import "./App.css";
 import "@picocss/pico";
@@ -56,6 +57,7 @@ function App() {
           element={<ErrorPage message={`This path doesn't exist`} />}
         />
       </Routes>
+      <Footer />
     </>
   );
 }
