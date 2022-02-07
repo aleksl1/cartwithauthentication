@@ -1,0 +1,48 @@
+.contact-page {
+  width: 70%;
+  margin: 50px auto;
+  text-align: center;
+}
+.header {
+  padding: 1rem;
+}
+.phone {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+.phone span {
+  padding: 0.5rem;
+}
+.phone-icon {
+  margin: 0 0.5rem;
+  font-size: 2rem;
+  color: #1095c1;
+  cursor: pointer;
+}
+.phone-number {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.title {
+  font-size: 1rem;
+  display: inline-block;
+  padding-bottom: 1rem;
+}
+.message {
+  width: 70%;
+  margin: 0 auto;
+}
+.message label,
+.message button {
+  margin: 0 auto;
+  width: 40%;
+}
+.socials {
+  font-size: 2rem;
+  color: rgb(0, 106, 206);
+}
+.socials span {
+  margin: 0 1rem;
+  cursor: pointer;
+}

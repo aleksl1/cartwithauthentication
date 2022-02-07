@@ -17,6 +17,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import { useSelector } from "react-redux";
 import AuthInformation from "./components/login/AuthInformation";
 import ItemDetailsPage from "./components/items/ItemDetailsPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.userIsLoggedIn);
@@ -56,6 +57,7 @@ function App() {
           path="*"
           element={<ErrorPage message={`This path doesn't exist`} />}
         />
+        <Route path="contact" element={<ContactPage />} />
       </Routes>
       <Footer />
     </>

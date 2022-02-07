@@ -1,0 +1,26 @@
+.load-data-btn {
+  text-decoration: underline;
+  color: #1095c1;
+  cursor: pointer;
+}
+.checkbox {
+  display: flex;
+  border: solid 1px #a2afb9;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.box-label {
+  text-align: left;
+  flex-basis: 15%;
+  padding-left: 0.4rem;
+}
+.checkbox-option {
+  flex-basis: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checkbox-option label {
+  padding-right: 0.5rem;
+}
