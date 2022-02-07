@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../components/layout/LoadingSpinner";
 import { initializeCart } from "../store/cart-slice";
 import { useNavigate } from "react-router-dom";
-const Payment = () => {
+import DeliveryData from "../components/other/DeliveryData";
+import PaymentMethod from "../components/other/PaymentMethod";
+import classes from "./PaymentPage.module.css";
+
+const PaymentPage = () => {
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [orderStarted, setOrderStarted] = useState(false);
   const [orderError, setOrderError] = useState("");
@@ -12,6 +16,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const userName = useSelector((state) => state.auth.userName);
   const userId = useSelector((state) => state.auth.userId);
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
   const existingCart = JSON.parse(localStorage.getItem("items"));
   const orderDetails = existingCart ? (
     existingCart.map((item) => (
@@ -79,13 +84,16 @@ const Payment = () => {
     <div className="order-confirmation">
       <article>
         <header>
-          <h2>{userName}</h2>
+          {userName ? <h2>{userName}</h2> : null}
           <span>You are ordering following items: </span>
         </header>
         <div className="order-details">{orderDetails}</div>
-        <div className="order-delivery-data">
-          <p>Additional data inputs</p>
-        </div>
+        <DeliveryData userName={userName} />
+        <p>
+          Total price for your items is{" "}
+          <strong>{totalPrice.toFixed(2)}$</strong>
+        </p>
+        <PaymentMethod />
         <button
           className="order-confirmation-btn"
           onClick={finalizeOrderHandler}
@@ -122,4 +130,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default PaymentPage;
