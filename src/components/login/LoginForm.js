@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginNewUser } from "../../store/auth-actions";
+import classes from "./Form.module.css";
 
 const LoginForm = () => {
   const [isFormInvalid, setIsFormInvalid] = useState(true);
@@ -34,10 +35,6 @@ const LoginForm = () => {
           password: inputPasswordRef.current.value,
         })
       );
-
-      // console.log(`local`, token);
-      // localStorage.setItem("token", token);
-
       navigate("/user/authinfo", {
         state: { action: "Login" },
       });
@@ -46,7 +43,7 @@ const LoginForm = () => {
 
   return (
     <div className="container">
-      <form onSubmit={submitFormHandler} className="form">
+      <form onSubmit={submitFormHandler} className={classes.form}>
         <label htmlFor="email">Email adress</label>
         <input
           type="email"
@@ -68,11 +65,6 @@ const LoginForm = () => {
         <button type="submit" disabled={isFormInvalid ? true : false}>
           Login
         </button>
-        {/* <p>
-          {isFormInvalid && (
-            <small className="invalid">Missing login data</small>
-          )}
-        </p> */}
         <small>
           <Link to="/user/resend">Forgot your password?</Link>
         </small>

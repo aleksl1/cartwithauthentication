@@ -1,0 +1,13 @@
+.login-page {
+  margin: 4rem auto;
+  width: 50%;
+  margin-bottom: 150px;
+}
+
+@media (max-width: 576px) {
+  .login-page {
+    margin: 2rem auto;
+    width: 80%;
+    margin-bottom: 150px;
+  }
+}

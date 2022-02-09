@@ -1,13 +1,3 @@
-dialog article.cart {
-  min-width: 50%;
-  max-height: 90vh;
-  overflow: scroll;
-}
-@media (max-width: 1200px) {
-  dialog article.cart {
-    min-width: 60%;
-  }
-}
 .cart-item {
   display: flex;
   flex-grow: 1;
@@ -19,7 +9,6 @@ dialog article.cart {
 .cart-item:nth-last-child(1) {
   margin-bottom: 1rem;
 }
-
 .cart-item .cart-item-data {
   flex-basis: 50%;
   display: flex;
@@ -67,30 +56,8 @@ dialog article.cart {
   font-size: 2.5rem;
   transform: rotate(45deg);
 }
-button.cart-actions-btn {
-  display: inline-block;
-  width: 30%;
-  margin: 0.5rem;
-}
-
-@media (max-width: 997px) {
-  dialog article.cart {
-    min-width: 80%;
-  }
-}
-@media (max-width: 768px) {
-  dialog article.cart {
-    min-width: 85%;
-  }
-}
 
 @media (max-width: 578px) {
-  .cart {
-    min-width: 80%;
-  }
-  dialog article.cart {
-    min-width: 95%;
-  }
   .cart-item {
     flex-wrap: nowrap;
     padding: 0.3rem;

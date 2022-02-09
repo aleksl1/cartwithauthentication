@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/auth-slice";
-import "./Navigation.css";
 import { FaCartPlus } from "react-icons/fa";
 import Logo from "./Logo";
+import classes from "./Navigation.module.css";
 
 const Navigation = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
@@ -40,40 +40,46 @@ const Navigation = () => {
   };
 
   return (
-    <div className="nav-container">
-      <div className="nav-mobile">
-        <div className="burger-menu" onClick={toggleMobileNavHandler}>
-          <div className="burger-top" animate={animateValue}></div>
-          <div className="burger-mid" animate={animateValue}></div>
-          <div className="burger-bot" animate={animateValue}></div>
+    <div className={classes["nav-container"]}>
+      <div className={classes["nav-mobile"]}>
+        <div
+          className={classes["burger-menu"]}
+          onClick={toggleMobileNavHandler}
+        >
+          <div className={classes["burger-top"]} animate={animateValue}></div>
+          <div className={classes["burger-mid"]} animate={animateValue}></div>
+          <div className={classes["burger-bot"]} animate={animateValue}></div>
         </div>
         <Logo />
-        <div className="cart-mobile">
-          <NavLink className="cart-icon" to="cart">
+        <div className={classes["cart-mobile"]}>
+          <NavLink className={classes["cart-icon"]} to="cart">
             <FaCartPlus />
 
             {cartAmount > 0 ? (
-              <span className="cart-icon-number">{cartAmount}</span>
+              <span className={classes["cart-icon-number"]}>{cartAmount}</span>
             ) : null}
           </NavLink>
         </div>
       </div>
       {showMobileNav && (
-        <nav className="menu-mobile">
-          <ul className="menu-mobile-list" onClick={menuItemClickHandler}>
-            <li className="menu-mobile-item">
+        <nav className={classes["menu-mobile"]}>
+          <ul
+            className={classes["menu-mobile-list"]}
+            onClick={menuItemClickHandler}
+          >
+            <li className={classes["menu-mobile-item"]}>
               <NavLink to="/">Shop</NavLink>
             </li>
-            <li className="menu-mobile-item">
+            <li className={classes["menu-mobile-item"]}>
               <NavLink to="/cart">Cart</NavLink>
             </li>
-            <li className="menu-mobile-item">
+            <li className={classes["menu-mobile-item"]}>
               <NavLink to="/contact">Contact</NavLink>
             </li>
-            <li className="menu-mobile-item">
+            <li className={classes["menu-mobile-item"]}>
               <NavLink to="/user/profile">Profile</NavLink>
             </li>
-            <li className="menu-mobile-item">
+            <li className={classes["menu-mobile-item"]}>
               {isLoggedIn ? (
                 <NavLink to="/" onClick={logoutHandler}>
                   Logout
@@ -85,17 +91,17 @@ const Navigation = () => {
           </ul>
         </nav>
       )}
-      <nav className="nav-desktop">
-        <ul className="cart-list">
+      <nav className={classes["nav-desktop"]}>
+        <ul className={classes["cart-list"]}>
           <li>
-            <NavLink className="cart-icon" to="cart">
+            <NavLink className={classes["cart-icon"]} to="cart">
               <FaCartPlus />
               {cartAmount > 0 ? (
-                <span className="cart-number">{cartAmount}</span>
+                <span className={classes["cart-number"]}>{cartAmount}</span>
               ) : null}
             </NavLink>
           </li>
-          <li className="cart-link">
+          <li className={classes["cart-link"]}>
             <NavLink to="cart">Cart</NavLink>
           </li>
         </ul>

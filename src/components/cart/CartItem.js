@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../../store/cart-slice";
+import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
@@ -35,36 +36,39 @@ const CartItem = (props) => {
     props.updateCart();
   };
   return (
-    <div className="cart-item" key={props.id}>
-      <div className="cart-item-data">
-        <div className="cart-item-image">
+    <div className={classes["cart-item"]} key={props.id}>
+      <div className={classes["cart-item-data"]}>
+        <div className={classes["cart-item-image"]}>
           <img src={props.image} alt="" />
         </div>
-        <span className="cart-item-amount">{props.amount} for</span>
-        <span className="cart-item-total">
+        <span className={classes["cart-item-amount"]}>{props.amount} for</span>
+        <span className={classes["cart-item-total"]}>
           {(props.price * props.amount).toFixed(2)}$
         </span>
       </div>
       {props.inCart ? (
-        <div className="cart-item-actions">
+        <div className={classes["cart-item-actions"]}>
           <span
-            className="cart-item-actions-remove"
+            className={classes["cart-item-actions-remove"]}
             onClick={removeOneFromCartHandler}
           >
             -
           </span>
-          <span className="cart-item-actions-add" onClick={addOneToCartHandler}>
+          <span
+            className={classes["cart-item-actions-add"]}
+            onClick={addOneToCartHandler}
+          >
             +
           </span>
           <span
-            className="cart-item-actions-delete secondary"
+            className={classes["cart-item-actions-delete"] + " secondary"}
             onClick={removeRecordFromCartHandler}
           >
             +
           </span>
         </div>
       ) : (
-        <div className="cart-item-name">
+        <div className={classes["cart-item-name"]}>
           <p>{props.name}</p>
         </div>
       )}

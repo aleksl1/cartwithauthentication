@@ -1,0 +1,20 @@
+.items-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-height: 65vh;
+}
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.pagination span {
+  display: inline-block;
+  color: #1095c1;
+  padding: 0.5rem;
+}
+span.active-page {
+  color: rgb(165, 42, 42);
+  text-decoration: underline;
+}

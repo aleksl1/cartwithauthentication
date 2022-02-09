@@ -1,0 +1,23 @@
+.order-confirmation {
+  margin: 0 auto;
+  margin-bottom: 150px;
+  width: 65%;
+  text-align: center;
+}
+.order-details {
+  text-align: center;
+}
+.order-confirmation-btn {
+  margin: 0 auto;
+  width: 40%;
+}
+@media (max-width: 1200px) {
+  .order-confirmation {
+    width: 71%;
+  }
+}
+@media (max-width: 992px) {
+  .order-confirmation {
+    width: 90%;
+  }
+}

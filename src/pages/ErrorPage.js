@@ -1,8 +1,10 @@
+import classes from "./ErrorPage.module.css";
+
 const ErrorPage = (props) => {
   return (
-    <div className="error-page">
+    <div className={classes["error-page"]}>
       <article>
-        <div className="error-message">{props.message}</div>
+        <div className={classes["error-message"]}>{props.message}</div>
       </article>
     </div>
   );

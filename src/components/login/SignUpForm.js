@@ -1,9 +1,8 @@
-import { useRef, useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useRef, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signUpNewUser } from "../../store/auth-actions";
-
-// const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
+import classes from "./Form.module.css";
 
 const SignUpForm = () => {
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -16,9 +15,6 @@ const SignUpForm = () => {
   const checkboxValueRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [wasFormSubmitted, setWasFormSubmitted] = useState(false);
-  // const [userSignedUp, setUserSignedUp] = useState(false);
-  // const [signUpFailed, setSignUpFailed] = useState(false);
 
   const inputEmailHandler = (e) => {
     setEmailBlur(false);
@@ -67,7 +63,6 @@ const SignUpForm = () => {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
-    // setWasFormSubmitted(true);
     if (
       inputEmailRef.current.value.includes("@") &&
       inputPasswordRef.current.value.length > 7
@@ -81,16 +76,12 @@ const SignUpForm = () => {
       navigate("/user/authinfo", {
         state: { action: "SignUp" },
       });
-      // setUserSignedUp(true);
     }
-    // inputEmailRef.current.value = "";
-    // inputPasswordRef.current.value = "";
-    // checkboxValueRef.current.value = false;
   };
 
   return (
     <div className="container">
-      <form onSubmit={submitFormHandler} className="form">
+      <form onSubmit={submitFormHandler} className={classes.form}>
         <label htmlFor="email">Email adress</label>
         <input
           type="email"

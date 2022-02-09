@@ -21,21 +21,39 @@ const DeliveryData = (props) => {
         <input type="text" name="email" placeholder="email@adress.com" />
         <div className={classes.checkbox}>
           <div className={classes["box-label"]}>
-            <label htmlFor="">Delivery option: </label>
+            <label htmlFor="">Deliver with:</label>
           </div>
           <div className={classes["checkbox-option"]}>
-            <label>By post</label>
-            <input type="checkbox" name="postOffice" checked />
+            <label for="deliveryOption1">Post Office</label>
+            <input
+              type="radio"
+              name="delivery"
+              value="postOffice"
+              id="deliveryOption1"
+            />
           </div>
           <div className={classes["checkbox-option"]}>
-            <label>UPS Delivery</label>
-            <input type="checkbox" name="ups" />
+            <label for="deliveryOption2">UPS Delivery</label>
+            <input
+              type="radio"
+              name="delivery"
+              value="upsDelivery"
+              id="deliveryOption2"
+            />
           </div>
           <div className={classes["checkbox-option"]}>
-            <label>Pick up order</label>
-            <input type="checkbox" name="pickup" />
+            <label for="deliveryOption3">Pick up</label>
+            <input
+              type="radio"
+              name="delivery"
+              value="pickUp"
+              id="deliveryOption3"
+            />
           </div>
         </div>
+        <p>
+          <small>no validation at the moment</small>
+        </p>
       </div>
     </>
   );
