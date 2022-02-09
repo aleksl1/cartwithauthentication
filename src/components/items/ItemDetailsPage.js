@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { addItemToCart } from "../../store/cart-slice";
-import "./ItemDetails.css";
+import classes from "./ItemDetailsPage.module.css";
 
 const ItemDetailsPage = () => {
   const [currentItem, setCurrentItem] = useState({});
@@ -15,7 +15,6 @@ const ItemDetailsPage = () => {
   useEffect(() => {
     const storedItem = JSON.parse(localStorage.getItem("itemDetails"));
     if (!storedItem) {
-      console.log(`set`);
       const newItem = items.find((item) => item.id === itemId);
       localStorage.setItem("itemDetails", `${JSON.stringify(newItem)}`);
       setCurrentItem(newItem);
@@ -41,25 +40,28 @@ const ItemDetailsPage = () => {
   };
 
   return (
-    <div className="item-details">
-      <div className="close-details-page" onClick={() => navigate(-1)}>
+    <div className={classes["item-details"]}>
+      <div
+        className={classes["close-details-page"]}
+        onClick={() => navigate(-1)}
+      >
         X
       </div>
-      <div className="item-name">
+      <div className={classes["item-name"]}>
         <h1>{currentItem.name}</h1>
       </div>
-      <div className="item-category">
+      <div className={classes["item-category"]}>
         <span>{currentItem.category}</span>
       </div>
-      <div className="item-image">
+      <div className={classes["item-image"]}>
         <img src={currentItem.image} alt={currentItem.name} />
       </div>
-      <div className="item-description">
+      <div className={classes["item-description"]}>
         <p>{currentItem.description}</p>
       </div>
 
-      <div className="item-actions-panel">
-        <span className="item-price">{currentItem.price}$</span>
+      <div className={classes["item-actions-panel"]}>
+        <span className={classes["item-price"]}>{currentItem.price}$</span>
         <button
           className="outline secondary"
           onClick={addToCartAndRedirectHandler}

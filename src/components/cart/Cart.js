@@ -3,7 +3,7 @@ import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCart } from "../../store/cart-slice";
 import CartItem from "./CartItem";
-import "./Cart.css";
+import classes from "./Cart.module.css";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const Cart = () => {
 
   return (
     <dialog open>
-      <article className="cart">
+      <article className={classes.cart}>
         <header>
           <span
             onClick={cartCloseHandler}
@@ -70,7 +70,7 @@ const Cart = () => {
             aria-label="Close"
             className="close secondary"
           ></span>
-          <div className="cart-data">
+          <div className={classes["cart-data"]}>
             <h5>{userName ? `Cart of ${userName}` : "Cart"}</h5>
           </div>
         </header>
@@ -78,7 +78,9 @@ const Cart = () => {
           <p>Your Cart is empty</p>
         ) : (
           <div className="container">
-            <div className="cart-items-container">{showCartItems}</div>
+            <div className={classes["cart-items-container"]}>
+              {showCartItems}
+            </div>
             <span>
               You have {totalItems} items in cart. For {totalPrice.toFixed(2)}$
             </span>
@@ -86,9 +88,9 @@ const Cart = () => {
         )}
 
         <footer>
-          <div className="cart-actions">
+          <div className={classes["cart-actions"]}>
             <button
-              className="cart-actions-btn"
+              className={classes["cart-actions-btn"]}
               disabled={totalItems === 0 ? true : false}
               onClick={cartPaymentHandler}
             >
@@ -96,7 +98,7 @@ const Cart = () => {
             </button>
             <button
               onClick={cartCloseHandler}
-              className="secondary cart-actions-btn"
+              className={classes["cart-actions-btn"] + " secondary"}
             >
               Close
             </button>

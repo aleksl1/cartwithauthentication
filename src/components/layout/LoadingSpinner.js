@@ -1,7 +1,7 @@
 const LoadingSpinner = () => {
   return (
     <div className="container">
-      <button aria-busy="true">Loading</button>
+      <button aria-busy="true">Loading...</button>
     </div>
   );
 };

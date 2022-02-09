@@ -10,8 +10,11 @@
   font-size: 1.2rem;
   font-weight: normal;
 }
-.phone span {
+.phone-title {
   padding: 0.5rem;
+}
+.phone-info {
+  display: inline-block;
 }
 .phone-icon {
   margin: 0 0.5rem;
@@ -36,7 +39,7 @@
 .message label,
 .message button {
   margin: 0 auto;
-  width: 40%;
+  width: 60%;
 }
 .socials {
   font-size: 2rem;
@@ -45,4 +48,61 @@
 .socials span {
   margin: 0 1rem;
   cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .message label,
+  .message button {
+    width: 70%;
+  }
+}
+@media (max-width: 992px) {
+  .contact-page {
+    width: 80%;
+  }
+  .message label,
+  .message button {
+    width: 80%;
+  }
+}
+@media (max-width: 720px) {
+  .contact-page {
+    width: 90%;
+  }
+}
+@media (max-width: 576px) {
+  .contact-page {
+    margin: 10px auto;
+  }
+  .header {
+    padding: 0.5rem;
+  }
+  .phone {
+    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .phone-title {
+    flex-basis: 100%;
+  }
+  .phone-info {
+    flex-basis: 50%;
+  }
+  .phone-icon {
+    font-size: 1.5rem;
+  }
+  .phone-number {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  .message {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .message label,
+  .message button {
+    width: 100%;
+  }
 }

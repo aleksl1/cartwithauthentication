@@ -1,4 +1,4 @@
-import { login, signUp, showStatusMessage } from "./auth-slice";
+import { login, signUp, showStatusMessage, logout } from "./auth-slice";
 
 export const signUpNewUser = (user) => {
   const SIGNUP_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
@@ -73,9 +73,9 @@ export const loginNewUser = (userData) => {
   };
 };
 
-export const changeUserPassword = async (newPassword, authToken) => {
+export const changeUserPassword = (newPassword, authToken) => {
   const CHANGE_PASSWORD_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
-  try {
+  return async (dispatch) => {
     const response = await fetch(CHANGE_PASSWORD_KEY, {
       method: "POST",
       body: JSON.stringify({
@@ -90,8 +90,37 @@ export const changeUserPassword = async (newPassword, authToken) => {
     if (!response.ok) {
       throw new Error("Password change failed");
     }
+    console.log(`????`);
     alert("Password change successfull");
-  } catch (error) {
-    alert(error);
-  }
+    dispatch(logout());
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("totalItems");
+    localStorage.removeItem("totalPrice");
+    localStorage.removeItem("items");
+  };
 };
+
+// export const changeUserPassword = async (newPassword, authToken) => {
+//   const CHANGE_PASSWORD_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
+//   try {
+//     const response = await fetch(CHANGE_PASSWORD_KEY, {
+//       method: "POST",
+//       body: JSON.stringify({
+//         idToken: authToken,
+//         password: newPassword,
+//         returnSecureToken: true,
+//       }),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     if (!response.ok) {
+//       throw new Error("Password change failed");
+//     }
+//     alert("Password change successfull");
+//   } catch (error) {
+//     alert(error);
+//   }
+// };

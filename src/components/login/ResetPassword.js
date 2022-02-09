@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { changeUserPassword } from "../../store/auth-actions";
 import { useSelector } from "react-redux";
+import classes from "./Form.module.css";
 
 const ResetPassword = () => {
   const useInputPasswordRef = useRef();
@@ -22,7 +23,7 @@ const ResetPassword = () => {
 
   return (
     <div className="container">
-      <form className="form" onSubmit={submitResetHandler}>
+      <form className={classes.form} onSubmit={submitResetHandler}>
         <label htmlFor="password">New Password</label>
         <input
           type="password"

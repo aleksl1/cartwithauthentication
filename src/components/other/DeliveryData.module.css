@@ -12,15 +12,37 @@
 }
 .box-label {
   text-align: left;
-  flex-basis: 15%;
+  flex-basis: 25%;
   padding-left: 0.4rem;
 }
 .checkbox-option {
-  flex-basis: 18%;
+  flex-basis: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .checkbox-option label {
   padding-right: 0.5rem;
+}
+
+@media (max-width: 720px) {
+  .checkbox {
+    flex-wrap: wrap;
+  }
+  .box-label {
+    flex-basis: 100%;
+    border-bottom: dotted 1px black;
+  }
+  .checkbox-option {
+    justify-content: flex-start;
+    flex-basis: 100%;
+    padding-top: 0.5rem;
+    padding-left: 0.4rem;
+  }
+
+  .checkbox-option label {
+    text-align: left;
+    width: 150px;
+    padding-right: 1.5rem;
+  }
 }

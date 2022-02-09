@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showStatusMessage } from "../store/auth-slice";
-
+import classes from "./LoginPage.module.css";
 const LoginPage = () => {
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   return (
     <main className="container">
-      <div className="login-page">
+      <div className={classes["login-page"]}>
         <Link to="login">
           <button onClick={resetMessageHandler}>Login</button>
         </Link>

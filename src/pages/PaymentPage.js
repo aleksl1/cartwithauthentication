@@ -81,13 +81,13 @@ const PaymentPage = () => {
   }, [orderSuccess, dispatch, navigate]);
 
   const pageContent = (
-    <div className="order-confirmation">
+    <div className={classes["order-confirmation"]}>
       <article>
         <header>
           {userName ? <h2>{userName}</h2> : null}
           <span>You are ordering following items: </span>
         </header>
-        <div className="order-details">{orderDetails}</div>
+        <div className={classes["order-details"]}>{orderDetails}</div>
         <DeliveryData userName={userName} />
         <p>
           Total price for your items is{" "}
@@ -95,7 +95,7 @@ const PaymentPage = () => {
         </p>
         <PaymentMethod />
         <button
-          className="order-confirmation-btn"
+          className={classes["order-confirmation-btn"]}
           onClick={finalizeOrderHandler}
         >
           Finalize
@@ -105,7 +105,7 @@ const PaymentPage = () => {
   );
 
   const pageErrorContent = (
-    <div className="order-confirmation">
+    <div className={classes["order-confirmation"]}>
       <article>
         <p>Ordering error, reason: {orderError}</p>
       </article>
@@ -113,7 +113,7 @@ const PaymentPage = () => {
   );
 
   const pageOrderSuccessContent = (
-    <div className="order-confirmation">
+    <div className={classes["order-confirmation"]}>
       <article>
         <p>Your order was successfull! Thank You for using our service</p>
       </article>

@@ -1,0 +1,8 @@
+.error-page {
+  margin: 0 auto;
+  width: 85%;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+}

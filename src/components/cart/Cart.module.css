@@ -1,0 +1,36 @@
+dialog article.cart {
+  min-width: 50%;
+  max-height: 90vh;
+  overflow: scroll;
+}
+@media (max-width: 1200px) {
+  dialog article.cart {
+    min-width: 60%;
+  }
+}
+
+.cart-actions-btn {
+  display: inline-block;
+  width: 30%;
+  margin: 0.5rem;
+}
+
+@media (max-width: 997px) {
+  dialog article.cart {
+    min-width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  dialog article.cart {
+    min-width: 85%;
+  }
+}
+
+@media (max-width: 578px) {
+  .cart {
+    min-width: 80%;
+  }
+  dialog article.cart {
+    min-width: 95%;
+  }
+}

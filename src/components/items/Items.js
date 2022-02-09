@@ -1,13 +1,17 @@
 import ItemCard from "./ItemCard";
 import LoadingSpinner from "../layout/LoadingSpinner";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setItems } from "../../store/items-slice";
-import "./Items.css";
+import classes from "./Items.module.css";
+
+const numberOfItemsOnPage = 8;
 
 const Items = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [activeItemsPage, setActiveItemsPage] = useState(1);
+  const [itemsPages, setItemPages] = useState();
   const dispatch = useDispatch();
   const items = useSelector((state) => state.items.items);
   const {
@@ -60,13 +64,32 @@ const Items = () => {
     return () => {};
   }, [totalItems, totalPrice, itemsInCart]);
 
-  return (
-    <div className="container items-display">
-      {isLoading && <LoadingSpinner />}
-      {errorMessage ? errorMessage : ""}
-      {!errorMessage &&
-        !isLoading &&
-        items.map((item) => (
+  const splitItemsIntoPages = useCallback(
+    (pageLength, itemsLength) => {
+      const pages = [];
+      const numberOfPages = Math.ceil(itemsLength / pageLength);
+      for (let i = 0; i < numberOfPages; i++) {
+        pages.push([]);
+      }
+      for (let i = 0; i < numberOfPages; i++) {
+        for (let j = pageLength * i; j < pageLength * (i + 1); j++) {
+          if (!items[j]) {
+            break;
+          }
+          pages[i].push(items[j]);
+        }
+      }
+      setItemPages([...pages]);
+    },
+    [items]
+  );
+  useEffect(() => {
+    splitItemsIntoPages(numberOfItemsOnPage, items.length);
+  }, [items, splitItemsIntoPages]);
+
+  const displayedItems =
+    itemsPages && itemsPages[0]
+      ? itemsPages[activeItemsPage - 1].map((item) => (
           <ItemCard
             id={item.id}
             key={item.id}
@@ -76,7 +99,43 @@ const Items = () => {
             category={item.category}
             image={item.image}
           />
-        ))}
+        ))
+      : null;
+
+  const pageChangeHandler = (e) => {
+    setActiveItemsPage(e.target.textContent);
+  };
+
+  const pagePagination =
+    itemsPages && itemsPages[0] ? (
+      <div className={classes.pagination} data-active={activeItemsPage}>
+        {[...Array(itemsPages.length)].map((page, index) =>
+          +activeItemsPage === +(index + 1) ? (
+            <span
+              className={classes["active-page"]}
+              key={index}
+              onClick={pageChangeHandler}
+            >
+              {index + 1}
+            </span>
+          ) : (
+            <span key={index} onClick={pageChangeHandler}>
+              {index + 1}
+            </span>
+          )
+        )}
+      </div>
+    ) : null;
+
+  return (
+    <div className="container">
+      {pagePagination}
+      <div className={classes["items-display"]}>
+        {isLoading && <LoadingSpinner />}
+        {errorMessage ? errorMessage : ""}
+        {!errorMessage && !isLoading && displayedItems}
+      </div>
+      {pagePagination}
     </div>
   );
 };
