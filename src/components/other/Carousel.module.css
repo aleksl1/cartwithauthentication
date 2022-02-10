@@ -1,0 +1,107 @@
+.carousel-container {
+  position: relative;
+  height: 270px;
+  width: 65%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  display: flex;
+  border-bottom: rgb(168, 168, 168) solid 1px;
+}
+.carousel {
+  width: 100%;
+  display: flex;
+  /* overflow: hidden; */
+  margin: 0 auto;
+  justify-content: center;
+}
+.mobile-carousel {
+  display: none;
+}
+
+.carousel-left-arrow,
+.carousel-right-arrow {
+  flex-basis: 5%;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+}
+.carousel-left-arrow-icon,
+.carousel-right-arrow-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  color: rgb(165, 42, 42);
+}
+
+.carousel-item {
+  position: relative;
+  width: 250px;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: inset 0 0 0.3rem rgb(168, 168, 168), 0 0 0.3rem rgb(153, 153, 153);
+  text-align: center;
+  cursor: pointer;
+}
+.carousel-item:hover {
+  border: solid 1px rgb(168, 168, 168);
+  box-shadow: inset 0 0 0.5rem rgb(168, 168, 168), 0 0 0.5rem rgb(153, 153, 153);
+}
+.carousel-item img {
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1200px) {
+  .carousel-container {
+    width: 75%;
+  }
+}
+
+@media (max-width: 992px) {
+  .carousel-container {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .carousel {
+    display: none;
+  }
+  .mobile-carousel {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .mobile-carousel-item {
+    width: 170px;
+    height: 100%;
+    padding: 0.3rem;
+    margin: 0 0.3rem;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: inset 0 0 0.2rem rgb(168, 168, 168),
+      0 0 0.2rem rgb(153, 153, 153);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .mobile-carousel-item:hover {
+    border: solid 1px rgb(168, 168, 168);
+    box-shadow: inset 0 0 0.4rem rgb(168, 168, 168),
+      0 0 0.4rem rgb(153, 153, 153);
+  }
+  .mobile-carousel-item img {
+    width: 110px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

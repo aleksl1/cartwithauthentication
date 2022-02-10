@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
 import { changeUserPassword } from "../../store/auth-actions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import classes from "./Form.module.css";
 
 const ResetPassword = () => {
   const useInputPasswordRef = useRef();
   const [isNewPasswordInvalid, setIsNewPasswordInvalid] = useState(false);
   const token = useSelector((state) => state.auth.authToken);
+  const dispatch = useDispatch();
   const submitResetHandler = (e) => {
     e.preventDefault();
     setIsNewPasswordInvalid(false);
@@ -16,8 +17,7 @@ const ResetPassword = () => {
       useInputPasswordRef.current.value = "";
       return;
     }
-    changeUserPassword(newPassword, token);
-
+    // dispatch(changeUserPassword(newPassword, token));
     useInputPasswordRef.current.value = "";
   };
 
@@ -32,7 +32,10 @@ const ResetPassword = () => {
           ref={useInputPasswordRef}
         />
         {isNewPasswordInvalid && <small>this password is invalid</small>}
-        <button type="submit">Reset password</button>
+        <button disabled type="submit">
+          Reset password
+        </button>
+        <small>Option disabled for convenience purposes :)</small>
       </form>
     </div>
   );

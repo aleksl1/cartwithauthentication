@@ -18,6 +18,15 @@ const LoginPage = () => {
   return (
     <main className="container">
       <div className={classes["login-page"]}>
+        <p>
+          <small>You can login using test@test.com , password: testtest</small>
+        </p>
+        <p>
+          <small>
+            or use any valid email adress - there is no confirmation implemented
+            at the moment
+          </small>
+        </p>
         <Link to="login">
           <button onClick={resetMessageHandler}>Login</button>
         </Link>

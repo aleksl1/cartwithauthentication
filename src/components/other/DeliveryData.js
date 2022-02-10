@@ -24,7 +24,7 @@ const DeliveryData = (props) => {
             <label htmlFor="">Deliver with:</label>
           </div>
           <div className={classes["checkbox-option"]}>
-            <label for="deliveryOption1">Post Office</label>
+            <label htmlFor="deliveryOption1">Post Office</label>
             <input
               type="radio"
               name="delivery"
@@ -33,7 +33,7 @@ const DeliveryData = (props) => {
             />
           </div>
           <div className={classes["checkbox-option"]}>
-            <label for="deliveryOption2">UPS Delivery</label>
+            <label htmlFor="deliveryOption2">UPS Delivery</label>
             <input
               type="radio"
               name="delivery"
@@ -42,7 +42,7 @@ const DeliveryData = (props) => {
             />
           </div>
           <div className={classes["checkbox-option"]}>
-            <label for="deliveryOption3">Pick up</label>
+            <label htmlFor="deliveryOption3">Pick up</label>
             <input
               type="radio"
               name="delivery"
