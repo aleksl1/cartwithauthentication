@@ -90,7 +90,7 @@ export const changeUserPassword = (newPassword, authToken) => {
     if (!response.ok) {
       throw new Error("Password change failed");
     }
-    console.log(`????`);
+
     alert("Password change successfull");
     dispatch(logout());
     localStorage.removeItem("token");
@@ -101,26 +101,3 @@ export const changeUserPassword = (newPassword, authToken) => {
     localStorage.removeItem("items");
   };
 };
-
-// export const changeUserPassword = async (newPassword, authToken) => {
-//   const CHANGE_PASSWORD_KEY = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA8ORI8Iftix7L_W_NkKSVUughlfaGqCgk`;
-//   try {
-//     const response = await fetch(CHANGE_PASSWORD_KEY, {
-//       method: "POST",
-//       body: JSON.stringify({
-//         idToken: authToken,
-//         password: newPassword,
-//         returnSecureToken: true,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     if (!response.ok) {
-//       throw new Error("Password change failed");
-//     }
-//     alert("Password change successfull");
-//   } catch (error) {
-//     alert(error);
-//   }
-// };

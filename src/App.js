@@ -45,7 +45,7 @@ function App() {
         />
         <Route
           path="user/profile/reset"
-          element={isLoggedIn && <ResetPassword />}
+          element={isLoggedIn ? <ResetPassword /> : <FrontPage />}
         />
         <Route path="user/signup" element={<SignUpForm />} />
         <Route
