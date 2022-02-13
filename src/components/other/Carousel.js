@@ -60,7 +60,7 @@ const Carousel = () => {
 
   return (
     <div className={classes["carousel-container"]}>
-      {items.length && (
+      {items.length > 0 ? (
         <>
           <div
             className={classes["carousel-left-arrow"]}
@@ -127,7 +127,7 @@ const Carousel = () => {
             />
           </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 };
