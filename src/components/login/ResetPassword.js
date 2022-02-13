@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
-import { changeUserPassword } from "../../store/auth-actions";
-import { useSelector, useDispatch } from "react-redux";
+// import { changeUserPassword } from "../../store/auth-actions";
+// import { useSelector, useDispatch } from "react-redux";
 import classes from "./Form.module.css";
 
 const ResetPassword = () => {
   const useInputPasswordRef = useRef();
   const [isNewPasswordInvalid, setIsNewPasswordInvalid] = useState(false);
-  const token = useSelector((state) => state.auth.authToken);
-  const dispatch = useDispatch();
+  // const token = useSelector((state) => state.auth.authToken);
+  // const dispatch = useDispatch();
   const submitResetHandler = (e) => {
     e.preventDefault();
     setIsNewPasswordInvalid(false);
